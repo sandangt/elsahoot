@@ -1,0 +1,39 @@
+volumes:
+  elsahoot-postgresql-volume:
+  elsahoot-redis-volume:
+
+networks:
+  elsahoot-network:
+
+services:
+
+  postgresql:
+    container_name: elsahoot-postgresql
+    build:
+      context: .
+      dockerfile: postgresql/Dockerfile
+    ports:
+      - ${POSTGRESQL_PORT}:5432
+    volumes:
+      - elsahoot-postgresql-volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRES_MULTIPLE_DATABASES: ${POSTGRESQL_DB}
+    networks:
+      - elsahoot-network
+
+  redis:
+    container_name: elsahoot-redis
+    image: redis:7.2.3
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes:
+      - elsahoot-redis-volume:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 30s
+      retries: 50
+    networks:
+      - elsahoot-network
