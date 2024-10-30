@@ -1,25 +1,12 @@
 from enum import Enum
 
 # region APP info
-APP_TITLE = 'Pirate Reel API'
+APP_TITLE = 'Elsa hoot API'
 APP_SWAGGER_URL = '/documentation'
 APP_REDOC_URL = '/documentation/redoc'
-APP_METADATA = [
-    {
-        'name': 'movies',
-        'description': 'This is movies api'
-    },
-    {
-        'name': 'series',
-        'description': 'This is series api'
-    },
-    {
-        'name': 'episodes',
-        'description': 'This is episodes api'
-    }
-]
 APP_VERSION = '0.2.0'
 APP_TIMEZONE = 'UTC'
+APP_METADATA = []
 APP_LOGGING_CONFIG = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -53,11 +40,7 @@ APP_LOGGING_CONFIG = {
         },
     },
     'loggers': {
-        'piratereel_sky_view': {
-            'handlers': ['console'],
-            'level': 'INFO'
-        },
-        'ophim_collector': {
+        'elsa': {
             'handlers': ['console'],
             'formatters': ['simple'],
             'level': 'DEBUG'
@@ -73,12 +56,6 @@ CORS_ALLOWED_ORIGINS = (
 )
 CORS_ALLOWED_METHODS = ['*']
 # endregion
-
-
-class BucketName(Enum):
-    TEMP = 'tmp'
-    REELS = 'reels'
-    MEDIA = 'media'
 
 
 class MemcacheDB(Enum):
