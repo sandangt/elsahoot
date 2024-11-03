@@ -1,0 +1,18 @@
+server:
+  port: ${SYSTEM_CONSOLE_PORT}
+  servlet.context-path: /console
+
+spring:
+  data:
+    mongodb:
+      host: ${MONGODB_HOST}
+      port: ${MONGODB_PORT}
+      authentication-database: admin
+      database: ${SYSTEM_CONSOLE_DB}
+      username: ${MONGODB_USER}
+      password: ${MONGODB_PASSWORD}
+
+app:
+  cors:
+    allowed-origins:
+      ${UI_STOREFRONT_URL},

@@ -1,5 +1,5 @@
 volumes:
-  elsahoot-postgresql-volume:
+  elsahoot-mongodb-volume:
   elsahoot-redis-volume:
 
 networks:
@@ -7,19 +7,19 @@ networks:
 
 services:
 
-  postgresql:
-    container_name: elsahoot-postgresql
+  mongodb:
+    container_name: elsahoot-mongodb
     build:
       context: .
-      dockerfile: postgresql/Dockerfile
+      dockerfile: mongodb/Dockerfile
     ports:
-      - ${POSTGRESQL_PORT}:5432
+      - ${MONGODB_PORT}:27017
     volumes:
-      - elsahoot-postgresql-volume:/var/lib/postgresql/data
+      - elsahoot-mongodb-volume:/data/db
     environment:
-      POSTGRES_USER: ${POSTGRESQL_USER}
-      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
-      POSTGRES_MULTIPLE_DATABASES: ${POSTGRESQL_DB}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODB_AUTHN_DATABASE}
     networks:
       - elsahoot-network
 
